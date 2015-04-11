@@ -27,6 +27,7 @@ F - FIND all the posts you're looking for. Just ***Send*** me a ***Question*** a
 - Support for emojis, email lists, Followers! 
 
 ## ERD DIAGRAMATIC DIAGRAM
-![image](~/Documents/ERD/Slide1.jpg "ERD")
+![Image of ERD](https://github.com/zargold/Blog/blob/master/Slide1.jpg?raw=true"ERD")
+
 
 
