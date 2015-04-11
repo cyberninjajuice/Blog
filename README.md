@@ -25,3 +25,8 @@ F - FIND all the posts you're looking for. Just ***Send*** me a ***Question*** a
 - Change the colors of your posts and customize the look and feel.
 
 - Support for emojis, email lists, Followers! 
+
+## ERD DIAGRAMATIC DIAGRAM
+![image](~/Documents/ERD/Slide1.jpg "ERD")
+
+
