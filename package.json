@@ -1,0 +1,23 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "A CRUD Web Application for Blogging",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.55.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zargold/Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zargold/Blog/issues"
+  },
+  "homepage": "https://github.com/zargold/Blog"
+}
