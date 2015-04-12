@@ -105,7 +105,7 @@
     </form>  
   </ol>
 
-  <form method="POST"action="/post/<%=post.id%>/comments_method=PUT">
+  <form method="POST"action="/post/comment/<%=post.id%>_method=PUT">
   <%comments.forEach(function(key){%>
   <div>
   <ul>
@@ -117,7 +117,8 @@
     </li>
     <li><label> Comment:<br></label>
       <textarea name="body"rows="5"cols="60"placeholder="This is a really cool post, but an even cooler WEBSITE!"><%-key.body%></textarea></li>
-    <li><input type="Finalized Edits!"value="Send"></li>
+    <input type="hidden" value="<%= key.id%>" name="id">
+    <li><input type="submit" name="Finalized Edits!" value="Send"></li>
   </ul>
   </div>
 </form>

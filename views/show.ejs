@@ -16,6 +16,7 @@
       h2{
         font-family: Futura, AppleGothic, Verdana, sans-serif;
         font-weight: bolder;
+        min-width:100%;
       }
       span{
         font-family: Futura, Verdana, sans-serif;
@@ -109,23 +110,25 @@
       </div>
     <%});%>
     <h3><br>Add your own<br></h3>
-        <div>
-    <form method="POST" action="/post/<%=post.id%>">
-      <ul>
-        <li><label>Writer:<br></label>
-          <input type="text" placeholder= "Johnny Coltrene" name="author">
-        </li>
-        <li>
-          <label>Tag:<br></label>
-          <input type="text" placeholder= "Great Work|Typo|Funny" name="tag">
-        </li>
-        <li>
-          <label>Comment:<br></label>
-          <textarea rows="5" cols="65" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="body"></textarea>
-        </li>
-        <li><input type="submit" value="Send"></li>
-      </ul>
-    </form>
+    <div>
+      <form method="POST" action="/post/<%=post.id%>">
+        <ul>
+          <li><label>Writer:<br></label>
+            <input type="text" placeholder= "Johnny Coltrene" name="author">
+          </li>
+          <li>
+            <label>Tag:<br></label>
+            <input type="text" placeholder= "Great Work|Typo|Funny" name="tag">
+          </li>
+          <li>
+            <label>Comment:<br></label>
+            <textarea rows="5" cols="65" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="body"></textarea>
+          </li>
+          <li>
+            <input type="submit" value="Send">
+          </li>
+        </ul>
+      </form>
     </div>
     </main>
 

@@ -100,10 +100,18 @@ app.get("/post/:id/edit", function(req, res) {
   });
 });
 //adding a comment to a particular article... To do this I will require a simple form which allows someone to post to a given postID. There will then have to be an associated comments table in the same database. When someone writes a comment to a particular post it will have to update that comment's PostID (much like an author's ID would appear on the books description) that comment's body (and title in some blogs but usually not...) that comment's user..It should have an automatically generated timestamp. Once a comment is posted to a particular article IF any comments exists they must be displayed on that post's page (along with the user, title, timestamp). Ideally the homepage where all the articles are would have a link with "0 comments" or more written. By clicking on that page the user is directed to: post/:id/comments/ (Ideally there woulde only one page which would allow editing or deleting of all the comments. This may be achieved by having a textbody editor appear for each comment who's postID matches the req.params.id.) In conclusion comments require the following: (id, tag, body, author, postID-set by looking at id of comments written). The count of comments associated with a specific blogpost may be achieved by comments.withpostID(?).length. 
-// app.post("/post/:id/", function(req, res) {
-//   var comID=req.params.id;
-//   db.run("INSERT INTO comments")
-// });
+app.post("/post/:id/", function(req, res) {
+  var comID = req.params.id;
+  console.log(comID);
+  console.log(req.body.tag + req.body.author + req.body.body);
+  db.run("INSERT INTO comments (tag, author, body, postID) VALUES (?, ?, ?, ?)", req.body.tag, req.body.author, req.body.body, comID, function(err, data) {
+    if (err) console.log(err);
+    else {
+      console.log(data);
+      res.redirect("/post/" + comID);
+    }
+  });
+});
 //upon click on edit this article Source: (index/show) Leads:(Home, Delete, Edit)
 app.put("/post/:id/", function(req, res) {
   var editID = req.params.id;
@@ -113,9 +121,26 @@ app.put("/post/:id/", function(req, res) {
   db.get("UPDATE posts SET title = (?), body = (?), imageUrl= (?) WHERE id= (?)", title, textBody, imageUrl, editID, function(err, data) {
     if (err) console.log(err);
     else console.log(data);
-    res.redirect("/post/" + editID);
+    res.redirect("/post/" + req.params.id);
   });
 });
+
+app.put("/post/comment/:id", function(req, res) {
+  var comID = req.body.id,
+    postID = req.params.id,
+    newBod = req.body.body,
+    newtag = req.body.tag,
+    newAuthor = req.body.author;
+    console.log(req.body);
+  db.get("UPDATE comments SET body = (?), tag = (?), author = (?) WHERE id= (?)", newBod, newtag, newAuthor, comID, function(err, data) {
+    if (err) console.log(err);
+    else {
+      console.log(data);
+      res.redirect("/post/" + postID + "/edit");
+    }
+  });
+});
+
 app.delete("/post/:id/comment/", function(req, res) {
   var postID = req.params.id,
     comID = req.body.id;
