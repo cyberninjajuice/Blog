@@ -65,12 +65,26 @@ app.get("/post/:id/edit", function(req, res) {
   });
 });
 
-app.put("/post/:id/", function(req, res){
-  var editID= req.body.id;
-  var textBody= req.body.body;
+app.post("/post/:id", function(req, res) {
+  var editID = req.params.id;
+  var textBody = req.body.body;
   var title = req.body.title;
-  console.log(textBody);
+  var imageUrl = req.body.imageUrl;
+  
+}
+
+app.put("/post/:id/", function(req, res) {
+  var editID = req.params.id;
+  var textBody = req.body.body;
+  var title = req.body.title;
+  var imageUrl = req.body.imageUrl;
+  db.get("UPDATE posts SET title = (?), body = (?), imageUrl= (?) WHERE id= (?)", title, textBody, imageUrl, editID, function(err, data) {
+    if (err) console.log(err);
+    else console.log(data);
+    res.redirect("/post/" + editID);
+  });
 });
+
 app.delete("/post/:id", function(req, res) {
   var postId = req.params.id;
   console.log(postId);
