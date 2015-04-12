@@ -84,10 +84,10 @@ app.get("/post/:id/edit", function(req, res) {
     }
   });
 });
-//adding a comment to a particular article... To do this I will require a simple form which allows someone to post to a given postID. There will then have to be an associated comments table in the same database. When someone writes a comment to a particular post it will have to update that comment's PostID (much like an author's ID would appear on the books description) that comment's body (and title in some blogs but usually not...) that comment's user..It should have an automatically generated timestamp. Once a comment is posted to a particular article IF any comments exists they must be displayed on that post's page (along with the user, title, timestamp). Ideally the homepage where all the articles are would have a link with "0 comments" or more written. By clicking on that page the user is directed to: post/:id/comments/ (Ideally there would be only one page which would allow editing or deleting of all the comments. This may be achieved by having a textbody editor appear for each comment who's postID matches the req.params.id.) In conclusion comments require the following: (id, tag, body, author, postID-set by looking at id of comments written). The count of comments associated with a specific blogpost may be achieved by comments.withpostID(?).length. 
+//adding a comment to a particular article... To do this I will require a simple form which allows someone to post to a given postID. There will then have to be an associated comments table in the same database. When someone writes a comment to a particular post it will have to update that comment's PostID (much like an author's ID would appear on the books description) that comment's body (and title in some blogs but usually not...) that comment's user..It should have an automatically generated timestamp. Once a comment is posted to a particular article IF any comments exists they must be displayed on that post's page (along with the user, title, timestamp). Ideally the homepage where all the articles are would have a link with "0 comments" or more written. By clicking on that page the user is directed to: post/:id/comments/ (Ideally there woulde only one page which would allow editing or deleting of all the comments. This may be achieved by having a textbody editor appear for each comment who's postID matches the req.params.id.) In conclusion comments require the following: (id, tag, body, author, postID-set by looking at id of comments written). The count of comments associated with a specific blogpost may be achieved by comments.withpostID(?).length. 
 app.post("/post/:id/", function(req, res) {
   var comID=req.params.id;
-
+  db.run("INSERT INTO comments")
 });
 //upon click on edit this article Source: (index/show) Leads:(Home, Delete, Edit)
 app.put("/post/:id/", function(req, res) {
@@ -101,7 +101,15 @@ app.put("/post/:id/", function(req, res) {
     res.redirect("/post/" + editID);
   });
 });
-
+app.delete("/post/:id/comment/", function(req,res) {
+  var postID= req.params.id, comID= req.body.id;
+  db.get("DELETE FROM comments WHERE ID = (?);", comID, function(err, deleted){
+    if(err) console.log(err);
+    else{
+      res.redirect("/comments");
+    }
+  })
+});
 //Upon click of delete button of a specific article.
 app.delete("/post/:id", function(req, res) {
   var postId = req.params.id;

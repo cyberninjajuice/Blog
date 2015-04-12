@@ -90,16 +90,24 @@
     <p><%-post.body%> <span><%-post.updated_at%></span></p>
     <% comments.forEach(function(key){ %>
     <article>
-    <h3><%-key.tag%> <span>  <%-key.updated_at%></span>
-    <h4><%-key.author%></h4>
+    <h3><%- key.tag %> <span>  <%- key.updated_at %></span>
+    <h4><%- key.author %></h4>
     <p><%-key.body%></p>
     </article>
     <form method="POST" action="/post/<%=post.id%>/comments_method=PUT">
-    <label> Writer:<br></label>
-    <input type="text" 
-
+    <ul>
+      <li><label> Writer:<br></label>
+        <input type="text" value="<%-key.author%>" name="author" placeholder= "Johnny Coltrene">
+      </li>
+      <li><label> Tag:</label>
+        <input type="text" value="<%-key.tag%>" placeholder= "Great Work|Typo|Funny" name="tag">
+      </li>
+      <li><label> Comment:</label>
+        <textarea name="body" rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"><%-key.body%></textarea></li>
+      <li><input type="Finalized Edits!" value="Send"></li>
+    </ul>
     </form>
-    <%})%>
+    <% });%>
     <div>
     <form method="POST" action="/post/<%=post.id%>">
       <ul>
@@ -108,7 +116,7 @@
         </li>
         <li>
           <label>Tag:<br></label>
-          <input type="text" placeholder= "Great Work/Typo/Funny" name="tag">
+          <input type="text" placeholder= "Great Work|Typo|Funny" name="tag">
         </li>
         <li>
           <label>Comment:<br></label>
