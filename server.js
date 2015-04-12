@@ -85,8 +85,16 @@ app.get("/post/:id/edit", function(req, res) {
     if (err) console.log(err);
     else {
       var cPost = currentData;
-      res.render("edit.ejs", {
-        post: cPost
+      db.all("SELECT * FROM comments WHERE postID=(?);", editID, function(err, dataInComments) {
+        if (err) console.log(err);
+        else {
+          var cData = dataInComments;
+          console.log(cData);
+          res.render("edit.ejs", {
+            post: cPost,
+            comments: cData
+          });
+        }
       });
     }
   });

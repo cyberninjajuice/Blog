@@ -2,13 +2,24 @@
   <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <style>
+<style>
       body{
         font-family: 'DINOT-Regular', Verdana;
+        font-size: 16px;
       }
       main {
-        display:flex;
-        flex-wrap:wrap;
+        display: block;
+        margin: 4px 1%;
+      }
+      main p{
+        border: yellow, solid, 3px;
+        border-radius: 2px;
+        margin: 6px;
+        font-size: 16px;
+        max-width: 80%;
+      }
+      main h3{ 
+        margin: 0 auto;
       }
       h2{
         font-family: Futura, AppleGothic, Verdana, sans-serif;
@@ -16,125 +27,102 @@
       }
       span{
         font-family: Futura, Verdana, sans-serif;
-        font-size: 16px;
+        font-size: 14px;
         color: rgba(30, 30,30,0.95);
+        font-weight: normal;
       }
       input, textarea{
-          font-size:40px;
-          background:rgba(240,240,30,1);
-          font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
-          font-size:120%;
-          cursor:pointer;
-          border-bottom:5px solid rgba(150,150,10,1);
-          border-radius:4px;
-          min-width: 150px;
-          min-height: 45px;
-      }
-      ul li
-      input:hover{
+        font-size:20px;
+        background:rgba(240,240,30,1);
+        font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+        font-size:120%;
+        border-bottom:5px solid rgba(150,150,150,1);
+        border-radius:4px;
+      } input:hover, textarea:hover{
         background:rgba(255,200,100,.9);
         border-bottom:2px solid rgba(175,140,60,1);
         border-radius:4px;
-      }
-      ul{
-        padding-left: 20%;
-        display:flex;
-
-      }
-      ul li{
+        cursor:text;
+      } ul{
+        padding-left: 2%;
+        display:inline-block;
+      } ul li{
         margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px;
+        display: inline-block;
+        padding: 5px 20px 5px 20px;
+      } ul input, ul textarea{
+        background: rgba(20, 200, 20, 0.5);
       }
-      ol input, textarea{
-        min-width: 600px;
-        min-width: 80%;
-        font-size: 13px;
-      }
-      ol{
+      ol {
         display:block;
-      }
-      ol li{
-        display: block;
-        padding: 1%;
-        margin: 0 auto;
-      }
-      input [type=submit]{
-        font-size:50px;
-        min-width:20%;
-        max-width:25%;
-      }
-      a{
-        padding: 20px;
-        margin: 20px;
-      }
-      p{
-        border: yellow, solid, 3px;
-        border-radius: 2px;
-
-        font-size: 11px;
+      } ol input, ol textarea{
+        min-width: 85%;
+        background: rgba(60, 20, 90, 0.5);
       }
       article{
-        border: black, solid, 5px;
+        border: black, solid, 10px;
+        padding:10px;
+        margin: 1px;
         border-radius: 3px;
-        background: rgba(200, 80, 80, 0.5);
+        background: rgba(60, 20, 90, 0.5);
+        max-width:99.5%;
+      }
+      article p{
+        font-size:16px;
+        max-width:100%;
+      }
+      h5{
+        margin:4px;
+      }
+      h4{
+        margin: 6px;
+      }
+      div{
+        border: 2px solid rgba(45, 10, 70, 0.25);
+        max-width: 80%;
+      }
+      div input{
+        margin:0 auto;
+        padding:2px;
+      }
+      h4 span{
+        margin: 5px;
+        padding: 4px 20px 5px 1px;
       }
     </style>
 
     <title> Blog Posts! </title>
   </head>
   <body>
-    <h2> PAST: <%-post.title%></h2>
-    <img src="<%=post.imageUrl%>">
-    <p><%-post.body%> <span><%-post.updated_at%></span></p>
-    <% comments.forEach(function(key){ %>
-    <article>
-    <h4><%- key.tag %> <span>  <%- key.updated_at %></span></h4>
-    <h4><%- key.author %></h4>
-    <p><%-key.body%></p>
-    </article>
-    <form method="POST" action="/post/<%=post.id%>/comments_method=PUT">
-    <ul>
-      <li><label> Writer:<br></label>
-        <input type="text" value="<%-key.author%>" name="author" placeholder= "Johnny Coltrene">
-      </li>
-      <li><label> Tag:</label>
-        <input type="text" value="<%-key.tag%>" placeholder= "Great Work|Typo|Funny" name="tag">
-      </li>
-      <li><label> Comment:</label>
-        <textarea name="body" rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"><%-key.body%></textarea></li>
-      <li><input type="Finalized Edits!" value="Send"></li>
-    </ul>
-    </form>
-    <% });%>
-    <div>
-    <form method="POST" action="/post/<%=post.id%>">
-      <ul>
-        <li><label>Writer:<br></label>
-          <input type="text" placeholder= "Johnny Coltrene" name="author">
-        </li>
-        <li>
-          <label>Tag:<br></label>
-          <input type="text" placeholder= "Great Work|Typo|Funny" name="tag">
-        </li>
-        <li>
-          <label>Comment:<br></label>
-          <textarea rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="body"></textarea>
-        </li>
-        <li><input type="submit" value="Send"></li>
-      </ul>
-    </form>
-    </div>
-    <ol>
-      <form method="POST" action="/post/<%=post.id%>?_method=PUT">
-        <li><label>Edit Title:<br></label><input type="text" name="title" value="<%-post.title%>"></li>
-        <li><label>Edit Body:<br></label><textarea rows="10" cols="50" name="body"><%-post.body%></textarea></li>
-        <li><label>Edit Image URL:<br></label><input type="text" name="imageUrl" value="<%=post.imageUrl%>"></li>
-        <li><label> Ensure Everything looks good :)<br></label>
-        <input type="submit" value="Confirm"></li>
-      </form>  
-    </ol>
+  <main>
+  <ol>
+    <form method="POST"action="/post/<%=post.id%>?_method=PUT">
+      <li><label>Edit Title:<br></label><input type="text"name="title"value="<%-post.title%>"></li>
+      <li><label>Edit Body:<br></label><textarea rows="15"cols="70"name="body"><%-post.body%></textarea></li>
+      <li><label>Edit Image URL:<br></label><input type="text"name="imageUrl"value="<%=post.imageUrl%>"></li>
+      <li><label> Ensure Everything looks good:)<br></label>
+      <input type="submit"value="Confirm"></li>
+    </form>  
+  </ol>
+
+  <form method="POST"action="/post/<%=post.id%>/comments_method=PUT">
+  <%comments.forEach(function(key){%>
+  <div>
+  <ul>
+    <li><label> Writer:<br></label>
+      <input type="text"value="<%-key.author%>"name="author"placeholder="Johnny Coltrene">
+    </li>
+    <li><label> Tag:<br></label>
+    <input type="text"value="<%-key.tag%>"placeholder="Great Work|Typo|Funny"name="tag">
+    </li>
+    <li><label> Comment:<br></label>
+      <textarea name="body"rows="5"cols="60"placeholder="This is a really cool post, but an even cooler WEBSITE!"><%-key.body%></textarea></li>
+    <li><input type="Finalized Edits!"value="Send"></li>
+  </ul>
+  </div>
+</form>
+<%});%>
+    <span>
     <ul>
       <li><form method="POST" action="/post/<%=post.id%>?_method=DELETE">
       <input type="submit" name= "delete" value="Delete this Post">
@@ -142,5 +130,7 @@
       <li><a href="/"> See All Posts</a></li>
       <li><a href="/post/add"> Add another Post</a></li>
     </ul>
+    </span>
+    </main>
   </body>
 </html>
