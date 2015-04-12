@@ -69,6 +69,17 @@
         padding: 20px;
         margin: 20px;
       }
+      p{
+        border: yellow, solid, 3px;
+        border-radius: 2px;
+
+        font-size: 11px;
+      }
+      article{
+        border: black, solid, 5px;
+        border-radius: 3px;
+        background: rgba(200, 80, 80, 0.5);
+      }
     </style>
 
     <title> Blog Posts! </title>
@@ -76,12 +87,35 @@
   <body>
     <h2> PAST: <%-post.title%></h2>
     <img src="<%=post.imageUrl%>">
-    <p><%-post.body%> <span><%-post.updated_at%></p>
-    <p><%-comment.body%></p>
+    <p><%-post.body%> <span><%-post.updated_at%></span></p>
+    <% comments.forEach(function(key){ %>
+    <article>
+    <h3><%-key.tag%> <span>  <%-key.updated_at%></span>
+    <h4><%-key.author%></h4>
+    <p><%-key.body%></p>
+    </article>
+    <form method="POST" action="/post/<%=post.id%>/comments_method=PUT">
+    <label> Writer:<br></label>
+    <input type="text" 
+
+    </form>
+    <%})%>
     <div>
     <form method="POST" action="/post/<%=post.id%>">
-      <label>Add a Comment<br></label>
-      <textarea rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="comment">
+      <ul>
+        <li><label>Writer:<br></label>
+          <input type="text" placeholder= "Johnny Coltrene" name="author">
+        </li>
+        <li>
+          <label>Tag:<br></label>
+          <input type="text" placeholder= "Great Work/Typo/Funny" name="tag">
+        </li>
+        <li>
+          <label>Comment:<br></label>
+          <textarea rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="body"></textarea>
+        </li>
+        <li><input type="submit" value="Send"></li>
+      </ul>
     </form>
     </div>
     <ol>

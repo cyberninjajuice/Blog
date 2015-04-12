@@ -88,7 +88,7 @@ app.get("/post/:id/edit", function(req, res) {
 app.post("/post/:id/", function(req, res) {
   var comID=req.params.id;
 
-})
+});
 //upon click on edit this article Source: (index/show) Leads:(Home, Delete, Edit)
 app.put("/post/:id/", function(req, res) {
   var editID = req.params.id;
