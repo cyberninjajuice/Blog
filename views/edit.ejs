@@ -87,10 +87,11 @@
       </form>  
     </ol>
     <ul>
-      <form method="POST" action="/post/<%=post.id%>?_method=DELETE">
-      <li><input type="submit" name= "delete" value="Delete this Post">
+      <li><form method="POST" action="/post/<%=post.id%>?_method=DELETE">
+      <input type="submit" name= "delete" value="Delete this Post">
       </form></li>
       <li><a href="/"> See All Posts</a></li>
+      <li><a href="/post/add"> Add another Post</a></li>
     </ul>
   </body>
 </html>
