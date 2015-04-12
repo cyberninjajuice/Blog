@@ -76,13 +76,20 @@
   <body>
     <h2> PAST: <%-post.title%></h2>
     <img src="<%=post.imageUrl%>">
-    <p><%-post.body%></p>
+    <p><%-post.body%> <span><%-post.updated_at%></p>
+    <p><%-comment.body%></p>
+    <div>
+    <form method="POST" action="/post/<%=post.id%>">
+      <label>Add a Comment<br></label>
+      <textarea rows="20" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!" name="comment">
+    </form>
+    </div>
     <ol>
       <form method="POST" action="/post/<%=post.id%>?_method=PUT">
         <li><label>Edit Title:<br></label><input type="text" name="title" value="<%-post.title%>"></li>
         <li><label>Edit Body:<br></label><textarea rows="10" cols="50" name="body"><%-post.body%></textarea></li>
         <li><label>Edit Image URL:<br></label><input type="text" name="imageUrl" value="<%=post.imageUrl%>"></li>
-        <li><label> Ensure Everything looks good: )<br></label>
+        <li><label> Ensure Everything looks good :)<br></label>
         <input type="submit" value="Confirm"></li>
       </form>  
     </ol>
