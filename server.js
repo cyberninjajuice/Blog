@@ -51,7 +51,7 @@ app.get("/post/:id", function(req, res) {
   });
 });
 
-app.put("/post/:id/edit", function(req, res) {
+app.get("/post/:id/edit", function(req, res) {
   var editID = req.params.id;
   console.log(editID);
   db.get("SELECT * FROM posts WHERE id= (?);", editID, function(err, currentData) {
@@ -63,9 +63,14 @@ app.put("/post/:id/edit", function(req, res) {
       });
     }
   });
-
 });
 
+app.put("/post/:id/", function(req, res){
+  var editID= req.body.id;
+  var textBody= req.body.body;
+  var title = req.body.title;
+  console.log(textBody);
+});
 app.delete("/post/:id", function(req, res) {
   var postId = req.params.id;
   console.log(postId);

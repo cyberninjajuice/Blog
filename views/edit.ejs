@@ -19,15 +19,18 @@
         font-size: 16px;
         color: rgba(30, 30,30,0.95);
       }
-      input{
-        font-size:40px;
+      input, textarea{
+          font-size:40px;
           background:rgba(240,240,30,1);
           font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
           font-size:120%;
           cursor:pointer;
           border-bottom:5px solid rgba(150,150,10,1);
           border-radius:4px;
+          min-width: 150px;
+          min-height: 45px;
       }
+      ul li
       input:hover{
         background:rgba(255,200,100,.9);
         border-bottom:2px solid rgba(175,140,60,1);
@@ -35,13 +38,36 @@
       }
       ul{
         padding-left: 20%;
-        display:inline-block;
+        display:flex;
 
       }
-      li{
+      ul li{
         margin: 0 auto;
-        display: inline-block;
-        padding: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px;
+      }
+      ol input, textarea{
+        min-width: 600px;
+        min-width: 80%;
+        font-size: 13px;
+      }
+      ol{
+        display:block;
+      }
+      ol li{
+        display: block;
+        padding: 1%;
+        margin: 0 auto;
+      }
+      input [type=submit]{
+        font-size:50px;
+        min-width:20%;
+        max-width:25%;
+      }
+      a{
+        padding: 20px;
+        margin: 20px;
       }
     </style>
 
@@ -53,9 +79,11 @@
     <p><%-post.body%></p>
     <ol>
       <form method="POST" action="/post/<%=post.id%>?_method=PUT">
-        <li><input type="text" name="title" value="<%-post.title%>"></li>
-        <li><textarea rows="10" cols="50" name="body"><%-post.body%></textarea></li>
-        <li><input type="text" name="imageUrl" value="<%=post.imageUrl%>"></li>
+        <li><label>Edit Title:<br></label><input type="text" name="title" value="<%-post.title%>"></li>
+        <li><label>Edit Body:<br></label><textarea rows="10" cols="50" name="body"><%-post.body%></textarea></li>
+        <li><label>Edit Image URL:<br></label><input type="text" name="imageUrl" value="<%=post.imageUrl%>"></li>
+        <li><label> Ensure Everything looks good: )<br></label>
+        <input type="submit" value="Confirm"></li>
       </form>  
     </ol>
     <ul>
