@@ -65,12 +65,16 @@ app.get("/post/:id/edit", function(req, res) {
   });
 });
 
+app.get("/post/add", function(req, res) {
+  res.render("add.ejs");
+}
+
 app.post("/post/:id", function(req, res) {
   var editID = req.params.id;
   var textBody = req.body.body;
   var title = req.body.title;
   var imageUrl = req.body.imageUrl;
-  
+
 }
 
 app.put("/post/:id/", function(req, res) {
