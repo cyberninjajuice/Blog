@@ -17,7 +17,7 @@ var methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
 var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database("/Users/Raz/Projects/Blog/db/blog.db");
+var db = new sqlite3.Database("./db/blog.db");
 //console.log(db.all("SELECT * FROM posts"));
 
 var request = require("request");
