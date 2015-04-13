@@ -134,18 +134,18 @@ app.put("/post/:id/", function(req, res) {
 });
 
 app.put("/post/:id/comment/", function(req, res) {
-  var comID = req.body.id, 
-    postID = req.params.id,
-    newBod = req.body.body,
-    newtag = req.body.tag,
-    newAuthor = req.body.author;
+  var comID = parseInt(req.body.id, 10),
+    postID = parseInt(req.params.id, 10),
+    newBod = req.body.body.trim(),
+    newTag = req.body.tag.trim(),
+    newAuthor = req.body.author.trim();
   console.log(req.body);
   console.log(req.params.id);
-  db.get("UPDATE comments SET body = (?), tag = (?), author = (?) WHERE id= (?)", newBod, newtag, newAuthor, comID, function(err, data) {
+  db.all("UPDATE comments SET body = (?), tag = (?), author = (?) WHERE id= (?)", newBod, newTag, newAuthor, comID, function(err, data) {
     if (err) console.log(err);
     else {
       console.log(data);
-      res.redirect("/post/" + postID + "/edit");
+      res.redirect("/post/" + postID);
     }
   });
 });
@@ -156,7 +156,7 @@ app.delete("/post/:id/comment/", function(req, res) {
   db.get("DELETE FROM comments WHERE ID = (?);", comID, function(err, deleted) {
     if (err) console.log(err);
     else {
-      res.redirect("/comments");
+      res.redirect("/");
     }
   });
 });

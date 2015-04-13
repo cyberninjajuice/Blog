@@ -105,10 +105,11 @@
     </form>  
   </ol>
 
-  <form method="POST"action="/post/<%=post.id%>/comment?_method=PUT">
+  
   <%comments.forEach(function(key){%>
   <div>
   <ul>
+  <form method="POST"action="/post/<%=post.id%>/comment?_method=PUT">
     <li><label> Writer: <br></label>
       <input type="text" value="<%-key.author%>" name="author" placeholder="Johnny Coltrene">
     </li>
@@ -118,11 +119,13 @@
     <li><label> Comment: <br></label>
       <textarea name="body" rows="5" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"> <%-key.body%> </textarea></li>
     <input type="hidden" value="<%=key.id%>" name="id">
-    <li><input type="submit" value="Send"></li>
+    <li><input type="submit" value="Submit Change"></li>
+    </form>
+    <%});%>
+  
   </ul>
   </div>
-</form>
-<%});%>
+
     <span>
     <ul>
       <li><form method="POST" action="/post/<%=post.id%>?_method=DELETE">
