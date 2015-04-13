@@ -1,75 +1,30 @@
 <!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
-    <style>
-      body{
-        font-family: 'DINOT-Regular', Verdana;
-      }
-      main {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      h2{
-        font-family: Futura, AppleGothic, Verdana, sans-serif;
-        font-weight: bolder;
-      }
-      span{
-        font-family: Futura, Verdana, sans-serif;
-        font-size: 16px;
-        color: rgba(30, 30,30,0.95);
-      }
-      input{
-        font-size:40px;
-          background:rgba(240,20,30,1);
-          font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
-          font-size:120%;
-          cursor:pointer;
-          border-bottom:5px solid rgba(150,10,10,1);
-          border-radius:4px;
-          display: inline-block;
-      }
-      input:hover{
-        background:rgba(255,0,0,.9);
-        border-bottom:2px solid rgba(200,60,60,1);
-        border-radius:4px;
-      }
-      div{
-        display: inline-block;
-        color:black;
-        background:rgba(240,240,30,1);
-      }
-      div a{
-        color:black;
-      }
-      a{
-        padding: 2px;
-        margin: 3px 10px 3px 5px;
-        font-size: 20px;
-        text-decoration: none;
-        color: rgba(180,120,20,1);
-      }
-      li{
-        min-width: 80%;
-        padding: 10px;
-      }
-      span{
-        font-size:14;
-        color: black;
-      }
-    </style>
-
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link href="http://localhost:3000/style.css" rel="stylesheet" type="text/css">
     <title> Blog Posts! </title>
   </head>
   <body>
     <h2> Your Blog Posts </h2>
     <ol>
       <% posts.forEach(function(key){ %>
-      <li> <a href="/post/<%=key.id%>"><%-key.title%> <span>(updated: <%-key.updated_at%>)</span></a> <div><a href="/post/<%=key.id%>/edit">Edit this</a></div><form method="POST" action="/post/<%=key.id%>?_method=DELETE">
-      <input type="submit" name= "delete" value="Delete this Post">
+      <li> <div><a href="/post/<%=key.id%>"><%-key.title%> <strong style="font-size:0.65em">(updated: <%-key.updated_at%>)</strong></a>
+      <span style="font-size: 0.75em; margin: 5px 0px 0px 0px;"><a href="/post/<%=key.id%>/edit">Edit this</a><form method="POST" action="/post/<%=key.id%>?_method=DELETE">
+      <input type="submit" name= "delete" value="Delete this Post"></div></span>
       </form></li>
       <%});%>
     </ol>
     <a href="/post/add">Write a New Post!</a>
+    <ol>
+      <form method="POST" action="/posts">
+        <li><label>Add a Title:<br></label><input type="text" name="title" placeholder="10 things I love about You!"></li>
+        <li><label>Add the Body:<br /></label><textarea rows="10" cols="50" name="body" placeholder="Wow I just found the best blog edittor evAr and it is so 1337!"></textarea></li>
+        <li><label>Add an image URL:<br></label><input type="text" name="imageUrl" placeholder="images.google.com/search/coolestPicEvar.jpg"></li>
+        <li><label> Ensure Everything looks good: )<br></label>
+        <span><input type="submit" value="Confirm"></li></span>
+      </form>  
+    </ol>
   </body>
 </html>

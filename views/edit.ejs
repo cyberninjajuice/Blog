@@ -2,133 +2,58 @@
   <html lang="en">
   <head>
     <meta charset="UTF-8">
-<style>
-      body{
-        font-family: 'DINOT-Regular', Verdana;
-        font-size: 16px;
-      }
-      main {
-        display: block;
-        margin: 4px 1%;
-      }
-      main p{
-        border: yellow, solid, 3px;
-        border-radius: 2px;
-        margin: 6px;
-        font-size: 16px;
-        max-width: 80%;
-      }
-      main h3{ 
-        margin: 0 auto;
-      }
-      h2{
-        font-family: Futura, AppleGothic, Verdana, sans-serif;
-        font-weight: bolder;
-      }
-      span{
-        font-family: Futura, Verdana, sans-serif;
-        font-size: 14px;
-        color: rgba(30, 30,30,0.95);
-        font-weight: normal;
-      }
-      input, textarea{
-        font-size:20px;
-        background:rgba(240,240,30,1);
-        font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
-        font-size:120%;
-        border-bottom:5px solid rgba(150,150,150,1);
-        border-radius:4px;
-      } input:hover, textarea:hover{
-        background:rgba(255,200,100,.9);
-        border-bottom:2px solid rgba(175,140,60,1);
-        border-radius:4px;
-        cursor:text;
-      } ul{
-        padding-left: 2%;
-        display:inline-block;
-      } ul li{
-        margin: 0 auto;
-        display: inline-block;
-        padding: 5px 20px 5px 20px;
-      } ul input, ul textarea{
-        background: rgba(20, 200, 20, 0.5);
-      }
-      ol {
-        display:block;
-      } ol input, ol textarea{
-        min-width: 85%;
-        background: rgba(60, 20, 90, 0.5);
-      }
-      article{
-        border: black, solid, 10px;
-        padding:10px;
-        margin: 1px;
-        border-radius: 3px;
-        background: rgba(60, 20, 90, 0.5);
-        max-width:99.5%;
-      }
-      article p{
-        font-size:16px;
-        max-width:100%;
-      }
-      h5{
-        margin:4px;
-      }
-      h4{
-        margin: 6px;
-      }
-      div{
-        border: 2px solid rgba(45, 10, 70, 0.25);
-        max-width: 80%;
-      }
-      div input{
-        margin:0 auto;
-        padding:2px;
-      }
-      h4 span{
-        margin: 5px;
-        padding: 4px 20px 5px 1px;
-      }
-    </style>
-
-    <title> Blog Posts! </title>
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link href="http://localhost:3000/style.css" rel="stylesheet" type="text/css">
+    <title> Edit: <%-post.id%> </title>
   </head>
   <body>
   <main>
-  <ol>
+  <ol style="display: inline"><h3> Edit Your Post: <%-post.title%></h3>
     <form method="POST"action="/post/<%=post.id%>?_method=PUT">
       <li><label>Edit Title:<br></label><input type="text"name="title"value="<%-post.title%>"></li>
-      <li><label>Edit Body:<br></label><textarea rows="15"cols="70"name="body"><%-post.body%></textarea></li>
+      <li><label>Edit Body:<br /></label><textarea rows="15" cols="70" name="body"> <%-post.body%></textarea></li>
       <li><label>Edit Image URL:<br></label><input type="text"name="imageUrl"value="<%=post.imageUrl%>"></li>
-      <li><label> Ensure Everything looks good:)<br></label>
-      <input type="submit"value="Confirm"></li>
+      <label> Ensure Everything looks good:)</label>
+      <li style="display:inline"><span><input type="submit"value="Confirm Edits"></span>
     </form>  
+    <form method="POST" action="/post/<%=post.id%>?_method=DELETE">
+      <label> Don't like it anymore?</label>
+      <span><input type="submit" name= "delete" value="Delete this Post"></span>
+      </li>
+      </form>
   </ol>
 
-  
-  <%comments.forEach(function(key){%>
-  <div>
-  <ul>
-  <form method="POST"action="/post/<%=post.id%>/comment?_method=PUT">
-    <li><label> Writer: <br></label>
-      <input type="text" value="<%-key.author%>" name="author" placeholder="Johnny Coltrene">
-    </li>
-    <li><label> Tag: <br></label>
-    <input type="text" value="<%-key.tag%>" placeholder="Great Work|Typo|Funny" name="tag">
-    </li>
-    <li><label> Comment: <br></label>
-      <textarea name="body" rows="5" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"> <%-key.body%> </textarea></li>
-    <input type="hidden" value="<%=key.id%>" name="id">
-    <li><input type="submit" value="Submit Change"></li>
-    </form>
-    <%});%>
-  
-  </ul>
-  </div>
+  <hr>
+  <ul><h3>Comments</h3>
+      <%comments.forEach(function(key){%>
+      <li>
+        <div>
+          <form method="POST" action="/post/<%=post.id%>/comment?_method=PUT">
+            <label> Writer: <br /></label>
+            <input type="text" value="<%-key.author%>" name="author" placeholder="Johnny Coltrene">
+            <label> <br>Tag: </br></label>
+            <input type="text" value="<%-key.tag%>" placeholder="Great Work|Typo|Funny" name="tag">
 
+            <label> <br>Comment: </br></label>
+            <textarea name="body" rows="5" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"> <%-key.body%> </textarea>
+            <input type="HIDDEN" value="<%=key.id%>" name="id">
+            <label> Everything Looks Good?</label>
+            <span><input type="SUBMIT" value="Submit Change"></span>
+          </form>
+          <form method="POST" action="/post/<%=post.id%>/comment?_method=DELETE">
+            <input type="HIDDEN" value="<%=key.id%>" name="id">
+           <label>Spam? Hate?</label>
+           <span><input type="SUBMIT" value="DELETE COMMENT!"></span><br></br>
+          </form>
+        </div>
+      </li>
+    <%});%>
+  </ul>
+<hr>
     <span>
     <ul>
-      <li><form method="POST" action="/post/<%=post.id%>?_method=DELETE">
+      <form method="POST" action="/post/<%=post.id%>?_method=DELETE">
+      <li><label> Are you sure?<br /></label>
       <input type="submit" name= "delete" value="Delete this Post">
       </form></li>
       <li><a href="/"> See All Posts</a></li>

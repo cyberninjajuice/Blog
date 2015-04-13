@@ -3,7 +3,10 @@ var express = require("express");
 
 var app = express();
 app.set("view_engine", "ejs");
+app.use(express.static(__dirname + '/public'));
+
 var port = 3000;
+
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({
