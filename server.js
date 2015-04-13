@@ -36,6 +36,14 @@ app.get("/posts", function(req, res) {
   });
 });
 
+app.get("/comments", function(req, res) {
+  db.all("SELECT * FROM comments;", function(err, dataInComments) {
+    if (err) console.log(err);
+    else {
+      var aCom = dataInComments;
+    }
+  });
+});
 //upon request of adding a new article is made.
 app.post("/posts", function(req, res) {
   var textBody = req.body.body;
@@ -125,13 +133,14 @@ app.put("/post/:id/", function(req, res) {
   });
 });
 
-app.put("/post/comment/:id", function(req, res) {
-  var comID = req.body.id,
+app.put("/post/:id/comment/", function(req, res) {
+  var comID = req.body.id, 
     postID = req.params.id,
     newBod = req.body.body,
     newtag = req.body.tag,
     newAuthor = req.body.author;
-    console.log(req.body);
+  console.log(req.body);
+  console.log(req.params.id);
   db.get("UPDATE comments SET body = (?), tag = (?), author = (?) WHERE id= (?)", newBod, newtag, newAuthor, comID, function(err, data) {
     if (err) console.log(err);
     else {

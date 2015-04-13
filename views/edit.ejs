@@ -105,20 +105,20 @@
     </form>  
   </ol>
 
-  <form method="POST"action="/post/comment/<%=post.id%>_method=PUT">
+  <form method="POST"action="/post/<%=post.id%>/comment?_method=PUT">
   <%comments.forEach(function(key){%>
   <div>
   <ul>
-    <li><label> Writer:<br></label>
-      <input type="text"value="<%-key.author%>"name="author"placeholder="Johnny Coltrene">
+    <li><label> Writer: <br></label>
+      <input type="text" value="<%-key.author%>" name="author" placeholder="Johnny Coltrene">
     </li>
-    <li><label> Tag:<br></label>
-    <input type="text"value="<%-key.tag%>"placeholder="Great Work|Typo|Funny"name="tag">
+    <li><label> Tag: <br></label>
+    <input type="text" value="<%-key.tag%>" placeholder="Great Work|Typo|Funny" name="tag">
     </li>
-    <li><label> Comment:<br></label>
-      <textarea name="body"rows="5"cols="60"placeholder="This is a really cool post, but an even cooler WEBSITE!"><%-key.body%></textarea></li>
-    <input type="hidden" value="<%= key.id%>" name="id">
-    <li><input type="submit" name="Finalized Edits!" value="Send"></li>
+    <li><label> Comment: <br></label>
+      <textarea name="body" rows="5" cols="60" placeholder="This is a really cool post, but an even cooler WEBSITE!"> <%-key.body%> </textarea></li>
+    <input type="hidden" value="<%=key.id%>" name="id">
+    <li><input type="submit" value="Send"></li>
   </ul>
   </div>
 </form>
