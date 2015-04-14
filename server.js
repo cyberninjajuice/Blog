@@ -32,8 +32,16 @@ app.get("/posts", function(req, res) {
     if (err) console.log(err);
     else {
       var pTable = dataStoredInPosts; //console.log(pTable);
-      res.render("index.ejs", { //sets data retrieved as "posts"
-        posts: pTable,
+      db.all("SELECT * FROM comments", function(err, dataInComments) {
+        if (err) console.log(err);
+        else {
+          var cData = dataInComments;
+          console.log(cData);
+          res.render("index.ejs", { //sets data retrieved as "posts"
+            posts: pTable,
+            comments: cData
+          });
+        }
       });
     }
   });

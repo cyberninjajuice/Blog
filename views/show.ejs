@@ -15,7 +15,7 @@
     <% comments.forEach(function(key){ %>
       <div>    
       <article>     
-        <h4><%= key.updated_at %> - <%- key.author %>: tags:  <strong><%- key.tag %></strong></h4>
+        <h4><%- key.updated_at %> - <%- key.author %>: tags:  <strong><%- key.tag %></strong></h4>
         <p><%- key.body %></p>
       </article>
       </div>
